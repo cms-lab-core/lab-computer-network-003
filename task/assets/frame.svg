@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520" role="img" aria-labelledby="t d">
+  <title id="t">Ethernet II header</title>
+  <desc id="d">The first fourteen bytes consist of six destination MAC bytes, six source MAC bytes, and two EtherType bytes followed by payload.</desc>
+  <rect width="1600" height="520" fill="#ffffff"/>
+  <style>
+    text{font-family:Inter,DejaVu Sans,Arial,sans-serif;fill:#172033}
+    .title{font-size:36px;font-weight:760}
+    .sub{font-size:18px;fill:#5d6676}
+    .field{stroke:#596579;stroke-width:2}
+    .dst{fill:#eef2ff}.src{fill:#edf9f1}.type{fill:#fff5e8}.payload{fill:#f7f8fa}
+    .name{font-size:20px;font-weight:720}
+    .mono{font-family:DejaVu Sans Mono,monospace;font-size:17px}
+    .byte{font-size:16px;fill:#6b7484}
+  </style>
+
+  <text class="title" x="800" y="60" text-anchor="middle">Ethernet II · первые 14 байт решают, кому и что несём</text>
+  <text class="sub" x="800" y="98" text-anchor="middle">Capture внутри Linux обычно не содержит FCS, поэтому начинаем разбор с destination MAC</text>
+
+  <text class="byte" x="120" y="160">byte 0</text>
+  <text class="byte" x="505" y="160">byte 6</text>
+  <text class="byte" x="890" y="160">byte 12</text>
+  <text class="byte" x="1045" y="160">byte 14</text>
+
+  <rect class="field dst" x="110" y="180" width="390" height="155" rx="16"/>
+  <rect class="field src" x="500" y="180" width="390" height="155" rx="16"/>
+  <rect class="field type" x="890" y="180" width="155" height="155" rx="16"/>
+  <rect class="field payload" x="1045" y="180" width="445" height="155" rx="16"/>
+
+  <text class="name" x="305" y="225" text-anchor="middle">Destination MAC</text>
+  <text class="mono" x="305" y="270" text-anchor="middle">6 bytes</text>
+  <text class="sub" x="305" y="307" text-anchor="middle">кому на этом сегменте</text>
+
+  <text class="name" x="695" y="225" text-anchor="middle">Source MAC</text>
+  <text class="mono" x="695" y="270" text-anchor="middle">6 bytes</text>
+  <text class="sub" x="695" y="307" text-anchor="middle">кто отправил кадр</text>
+
+  <text class="name" x="968" y="225" text-anchor="middle">EtherType</text>
+  <text class="mono" x="968" y="270" text-anchor="middle">2 bytes</text>
+  <text class="sub" x="968" y="307" text-anchor="middle">тип payload</text>
+
+  <text class="name" x="1268" y="225" text-anchor="middle">Payload</text>
+  <text class="mono" x="1268" y="270" text-anchor="middle">IPv4 / IPv6 / ARP …</text>
+  <text class="sub" x="1268" y="307" text-anchor="middle">данные верхнего протокола</text>
+
+  <text class="mono" x="800" y="400" text-anchor="middle">0..5 destination · 6..11 source · 12..13 EtherType · 14.. payload</text>
+  <text class="sub" x="800" y="445" text-anchor="middle">Для IPv4 EtherType равен 0x0800. Ethernet header не входит в IP MTU.</text>
+</svg>

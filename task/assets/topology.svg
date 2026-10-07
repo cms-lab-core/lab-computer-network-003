@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="620" viewBox="0 0 1500 620" role="img" aria-labelledby="t d">
+  <title id="t">Lab 003 topology</title>
+  <desc id="d">Two Linux hosts share one Ethernet segment. eth1 MAC addresses are fixed; IPv4 addresses are configured by the student. eth0 remains management only.</desc>
+  <rect width="1500" height="620" fill="#ffffff"/>
+  <style>
+    text{font-family:Inter,DejaVu Sans,Arial,sans-serif;fill:#172033}
+    .title{font-size:36px;font-weight:760}
+    .sub{font-size:19px;fill:#5c6678}
+    .node{fill:#f8fbff;stroke:#3559e0;stroke-width:3}
+    .chip{fill:#eef2ff;stroke:#aebaff;stroke-width:1.5}
+    .name{font-size:30px;font-weight:760}
+    .mono{font-family:DejaVu Sans Mono,monospace;font-size:18px}
+    .link{stroke:#3559e0;stroke-width:7;stroke-linecap:round}
+    .mgmt{stroke:#a8b0bd;stroke-width:3;stroke-dasharray:10 10}
+    .label{font-size:19px;font-weight:700}
+  </style>
+
+  <text class="title" x="750" y="58" text-anchor="middle">Lab 003 · Один Ethernet-сегмент</text>
+  <text class="sub" x="750" y="95" text-anchor="middle">MAC фиксированы стендом; IPv4 и neighbor mapping настраивает студент</text>
+
+  <rect class="node" x="120" y="155" width="470" height="290" rx="28"/>
+  <text class="name" x="355" y="210" text-anchor="middle">pc1 · Linux</text>
+  <rect class="chip" x="165" y="245" width="380" height="50" rx="14"/>
+  <text class="mono" x="355" y="277" text-anchor="middle">eth1 MAC 02:00:00:00:03:01</text>
+  <rect class="chip" x="165" y="315" width="380" height="50" rx="14"/>
+  <text class="mono" x="355" y="347" text-anchor="middle">IPv4 198.51.100.10/24</text>
+  <text class="sub" x="355" y="408" text-anchor="middle">IPv4 добавляет студент</text>
+
+  <rect class="node" x="910" y="155" width="470" height="290" rx="28"/>
+  <text class="name" x="1145" y="210" text-anchor="middle">pc2 · Linux</text>
+  <rect class="chip" x="955" y="245" width="380" height="50" rx="14"/>
+  <text class="mono" x="1145" y="277" text-anchor="middle">eth1 MAC 02:00:00:00:03:02</text>
+  <rect class="chip" x="955" y="315" width="380" height="50" rx="14"/>
+  <text class="mono" x="1145" y="347" text-anchor="middle">IPv4 198.51.100.20/24</text>
+  <text class="sub" x="1145" y="408" text-anchor="middle">IPv4 добавляет студент</text>
+
+  <line class="link" x1="590" y1="300" x2="910" y2="300"/>
+  <text class="label" x="750" y="268" text-anchor="middle">eth1 ↔ eth1</text>
+  <text class="sub" x="750" y="337" text-anchor="middle">кадры Ethernet II</text>
+
+  <line class="mgmt" x1="355" y1="445" x2="355" y2="530"/>
+  <line class="mgmt" x1="1145" y1="445" x2="1145" y2="530"/>
+  <text class="sub" x="355" y="565" text-anchor="middle">eth0 · management · не трогаем</text>
+  <text class="sub" x="1145" y="565" text-anchor="middle">eth0 · management · не трогаем</text>
+</svg>
