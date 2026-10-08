@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img" aria-labelledby="t d">
+  <title id="t">Как Ethernet frame проходит один сегмент</title>
+  <desc id="d">Four-phase animation: pc1 builds a frame, EtherType describes IPv4 payload, frame moves over the link, and pc2 accepts it because destination MAC matches.</desc>
+  <rect width="1600" height="920" fill="#ffffff"/>
+  <style>
+    text{font-family:Inter,DejaVu Sans,Arial,sans-serif;fill:#172033}
+    .title{font-size:36px;font-weight:770}
+    .sub{font-size:18px;fill:#5d6677}
+    .node{fill:#f8fbff;stroke:#3559e0;stroke-width:3}
+    .frame{fill:#ffffff;stroke:#3f4b5f;stroke-width:2}
+    .dst{fill:#eef2ff}.src{fill:#edf9f1}.etype{fill:#fff5e8}.payload{fill:#f6f7f9}
+    .label{font-size:20px;font-weight:720}
+    .mono{font-family:DejaVu Sans Mono,monospace;font-size:16px}
+    .wire{stroke:#3559e0;stroke-width:7;stroke-linecap:round}
+    .badge{fill:#ecf9f0;stroke:#58a66b;stroke-width:2}
+    .phase1{animation:p1 12s infinite}
+    .phase2{animation:p2 12s infinite}
+    .phase3{animation:p3 12s infinite}
+    .phase4{animation:p4 12s infinite}
+    .moving{animation:move 12s infinite;transform-box:fill-box;transform-origin:center}
+    @keyframes p1{0%,18%{opacity:1}22%,100%{opacity:.18}}
+    @keyframes p2{0%,18%{opacity:.18}22%,40%{opacity:1}44%,100%{opacity:.18}}
+    @keyframes p3{0%,40%{opacity:.18}44%,70%{opacity:1}74%,100%{opacity:.18}}
+    @keyframes p4{0%,70%{opacity:.18}74%,94%{opacity:1}98%,100%{opacity:.18}}
+    @keyframes move{
+      0%,42%{opacity:.25;transform:translateX(0)}
+      46%{opacity:1;transform:translateX(0)}
+      66%{opacity:1;transform:translateX(520px)}
+      72%{opacity:.25;transform:translateX(520px)}
+      100%{opacity:.25;transform:translateX(0)}
+    }
+  </style>
+
+  <text class="title" x="800" y="58" text-anchor="middle">Один IP packet едет внутри Ethernet frame</text>
+  <text class="sub" x="800" y="96" text-anchor="middle">На этом сегменте pc1 выбирает MAC pc2; receiver принимает кадр только при подходящем destination MAC</text>
+
+  <rect class="node" x="90" y="180" width="330" height="220" rx="26"/>
+  <text class="label" x="255" y="235" text-anchor="middle">pc1</text>
+  <text class="mono" x="255" y="280" text-anchor="middle">MAC 02:00:00:00:03:01</text>
+  <text class="mono" x="255" y="318" text-anchor="middle">IP 198.51.100.10</text>
+  <text class="sub" x="255" y="365" text-anchor="middle">sender</text>
+
+  <rect class="node" x="1180" y="180" width="330" height="220" rx="26"/>
+  <text class="label" x="1345" y="235" text-anchor="middle">pc2</text>
+  <text class="mono" x="1345" y="280" text-anchor="middle">MAC 02:00:00:00:03:02</text>
+  <text class="mono" x="1345" y="318" text-anchor="middle">IP 198.51.100.20</text>
+  <text class="sub" x="1345" y="365" text-anchor="middle">receiver</text>
+
+  <line class="wire" x1="420" y1="290" x2="1180" y2="290"/>
+
+  <g class="moving">
+    <rect class="frame" x="485" y="220" width="520" height="140" rx="18"/>
+    <rect class="dst" x="500" y="240" width="145" height="100" rx="12"/>
+    <rect class="src" x="645" y="240" width="145" height="100" rx="12"/>
+    <rect class="etype" x="790" y="240" width="95" height="100" rx="12"/>
+    <rect class="payload" x="885" y="240" width="105" height="100" rx="12"/>
+    <text class="mono" x="572" y="276" text-anchor="middle">dst</text>
+    <text class="mono" x="572" y="307" text-anchor="middle">…03:02</text>
+    <text class="mono" x="717" y="276" text-anchor="middle">src</text>
+    <text class="mono" x="717" y="307" text-anchor="middle">…03:01</text>
+    <text class="mono" x="838" y="276" text-anchor="middle">type</text>
+    <text class="mono" x="838" y="307" text-anchor="middle">0800</text>
+    <text class="mono" x="938" y="276" text-anchor="middle">IPv4</text>
+    <text class="mono" x="938" y="307" text-anchor="middle">ICMP</text>
+  </g>
+
+  <rect class="frame phase1" x="170" y="485" width="1260" height="90" rx="18"/>
+  <text class="label" x="215" y="522">1 · BUILD</text>
+  <text class="sub" x="215" y="552">Neighbor mapping даёт destination MAC; source MAC берётся с outgoing interface.</text>
+
+  <rect class="frame phase2" x="170" y="600" width="1260" height="90" rx="18"/>
+  <text class="label" x="215" y="637">2 · DESCRIBE PAYLOAD</text>
+  <text class="sub" x="215" y="667">EtherType 0x0800 говорит receiver: внутри Ethernet payload находится IPv4 packet.</text>
+
+  <rect class="frame phase3" x="170" y="715" width="1260" height="90" rx="18"/>
+  <text class="label" x="215" y="752">3 · SEND ON THIS LINK</text>
+  <text class="sub" x="215" y="782">Frame существует в контексте одного L2-сегмента и передаётся через eth1.</text>
+
+  <rect class="badge phase4" x="410" y="835" width="780" height="60" rx="18"/>
+  <text class="label" x="800" y="873" text-anchor="middle">4 · ACCEPT · destination MAC совпал с MAC pc2</text>
+</svg>
